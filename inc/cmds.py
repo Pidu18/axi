@@ -3,7 +3,7 @@ from discord.ext import commands
 import random
 import async
 
-Class Cmds:
+class Cmds:
  def _init_(self):
   self.bot=bot
   
