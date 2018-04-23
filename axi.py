@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
-initial_cogs = {"cogs.tracking", "cogs.owner", "cogs.mod", "cogs.admin", "cogs.tibia", "cogs.general", "cogs.loot",
-                "cogs.tibiawiki"}
+initial_cogs = {}
 
 
 class NabBot(commands.Bot):
