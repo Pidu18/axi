@@ -20,7 +20,6 @@ class NabBot(commands.Bot):
         
         
  if __name__ == "__main__":
-    token = get_token()
 
     print("Loading cogs...")
     for cog in initial_cogs:
@@ -33,7 +32,7 @@ class NabBot(commands.Bot):
 
     try:
         print("Attempting login...")
-        axi.run(token)
+        axi.run('NDI2MDEzMTk4MzQ1NTY4MjY2.Db-p-w.xgsAn3RfRYlVz_9RBWrq4uglzvs')
     except discord.errors.LoginFailure:
         print("Invalid token. Edit token.txt to fix it.")
         input("\nPress any key to continue...")
