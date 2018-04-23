@@ -21,4 +21,4 @@ class CMDS():
 
   
 def setup(bot):
-bot.add_cog(CMDS(bot))
+    bot.add_cog(CMDS(bot))
