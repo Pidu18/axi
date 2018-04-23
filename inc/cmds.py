@@ -12,5 +12,5 @@ class Cmds:
   await self.bot.say("Pong")
   
 def setup(bot):
- bot.add_cog(Mod(bot))
+ bot.add_cog(Cmds(bot))
   
