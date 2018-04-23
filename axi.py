@@ -1,39 +1,54 @@
-import discord
 from discord.ext import commands
-initial_cogs = {}
 
+description = '''An example bot to showcase the discord.ext.commands extension
+module.
+There are a number of utility commands being showcased here.'''
 
-class axi(commands.Bot):
-    def __init__(self):
-        super().__init__(command_prefix=["/"], description='Mission: Destroy all humans.', pm_help=True,
-                         formatter=NabHelpFormat())
-        self.remove_command("help")
-        self.command_list = []
-        self.members = {}
+# this specifies what extensions to load when the bot starts up
+startup_extensions = ["members", "rng"]
 
-    async def on_ready(self):
-        """Called when the bot is ready."""
-        print('Logged in as')
-        print(self.user)
-        print(self.user.id)
-        print('------')
-        
-        
- if __name__ == "__main__":
+bot = commands.Bot(command_prefix='?', description=description)
 
-    print("Loading cogs...")
-    for cog in initial_cogs:
-        try:
-            nabbot.load_extension(cog)
-            print("Cog {} loaded successfully.".format(cog))
-        except Exception as e:
-            print('Cog {} failed to load:'.format(cog))
-            traceback.print_exc(limit=-1)
+@bot.event
+async def on_ready():
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
 
+@bot.command()
+async def load(extension_name : str):
+    """Loads an extension."""
     try:
-        print("Attempting login...")
-        axi.run('NDI2MDEzMTk4MzQ1NTY4MjY2.Db-p-w.xgsAn3RfRYlVz_9RBWrq4uglzvs')
-    except discord.errors.LoginFailure:
-        print("Invalid token. Edit token.txt to fix it.")
-        input("\nPress any key to continue...")
-        quit()
+        bot.load_extension(extension_name)
+    except (AttributeError, ImportError) as e:
+        await bot.say("```py\n{}: {}\n```".format(type(e).__name__, str(e)))
+        return
+    await bot.say("{} loaded.".format(extension_name))
+
+@bot.command()
+async def unload(extension_name : str):
+    """Unloads an extension."""
+    bot.unload_extension(extension_name)
+    await bot.say("{} unloaded.".format(extension_name))
+
+@bot.command()
+async def add(left : int, right : int):
+    """Adds two numbers together."""
+    await bot.say(left + right)
+
+@bot.command()
+async def repeat(times : int, content='repeating...'):
+    """Repeats a message multiple times."""
+    for i in range(times):
+        await bot.say(content)
+
+if __name__ == "__main__":
+    for extension in startup_extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            exc = '{}: {}'.format(type(e).__name__, e)
+            print('Failed to load extension {}\n{}'.format(extension, exc))
+
+bot.run('NDI2MDEzMTk4MzQ1NTY4MjY2.Db-p-w.xgsAn3RfRYlVz_9RBWrq4uglzvs')
