@@ -1,13 +1,11 @@
 from discord.ext import commands
 
-description = '''An example bot to showcase the discord.ext.commands extension
-module.
-There are a number of utility commands being showcased here.'''
+
 
 # this specifies what extensions to load when the bot starts up
 startup_extensions = ["members", "rng"]
 
-bot = commands.Bot(command_prefix='?', description=description)
+bot = commands.Bot(command_prefix='?', description='Mission: Destroy all humans.')
 
 @bot.event
 async def on_ready():
