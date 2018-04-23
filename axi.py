@@ -3,7 +3,7 @@ from discord.ext import commands
 initial_cogs = {}
 
 
-class NabBot(commands.Bot):
+class axi(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix=["/"], description='Mission: Destroy all humans.', pm_help=True,
                          formatter=NabHelpFormat())
